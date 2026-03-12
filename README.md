@@ -107,7 +107,7 @@ Client__Landing_Page/
 
 For business inquiries and project collaborations:
 
-📧 **[sansynapsein@gmail.com](mailto:sansynapsein@gmail.com)**
+📧 **[hamtechinnovatives@gmail.com](mailto:hamtechinnovatives@gmail.com)**
 
 ---
 
