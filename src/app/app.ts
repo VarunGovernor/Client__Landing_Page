@@ -755,7 +755,7 @@ export class App implements AfterViewInit, OnDestroy {
       
       try {
         const v = this.contactForm.value;
-        const response = await fetch("https://formsubmit.co/ajax/hamtechinnovatives@gmail.com", {
+        const response = await fetch("https://formsubmit.co/ajax/contactus@hamtechinnovations.com", {
           method: "POST",
           headers: { 
             'Content-Type': 'application/json',
