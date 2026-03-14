@@ -70,7 +70,11 @@ export class App implements AfterViewInit, OnDestroy {
   private fb = inject(FormBuilder);
   contactForm: FormGroup = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(2)]],
+    company: [''],
     email: ['', [Validators.required, Validators.email]],
+    phone: [''],
+    service: ['', Validators.required],
+    budget: [''],
     message: ['', [Validators.required, Validators.minLength(10)]]
   });
 
@@ -750,6 +754,7 @@ export class App implements AfterViewInit, OnDestroy {
       this.isSending.set(true);
       
       try {
+        const v = this.contactForm.value;
         const response = await fetch("https://formsubmit.co/ajax/hamtechinnovatives@gmail.com", {
           method: "POST",
           headers: { 
@@ -757,10 +762,14 @@ export class App implements AfterViewInit, OnDestroy {
             'Accept': 'application/json'
           },
           body: JSON.stringify({
-            name: this.contactForm.value.name,
-            email: this.contactForm.value.email,
-            message: this.contactForm.value.message,
-            _subject: 'New Submission from Ham Tech Innovatives Website'
+            name: v.name,
+            company: v.company || 'N/A',
+            email: v.email,
+            phone: v.phone || 'N/A',
+            service_interested_in: v.service,
+            budget: v.budget || 'Not specified',
+            message: v.message,
+            _subject: `New Project Inquiry from ${v.name} — Ham Tech Innovations`
           })
         });
 
