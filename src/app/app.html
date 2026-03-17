@@ -3,20 +3,21 @@
   <div #canvasContainer class="fixed inset-0 z-0 pointer-events-none"></div>
 
   <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-4 bg-white/70 backdrop-blur-md border-b border-slate-200">
+  <nav class="fixed top-0 left-0 right-0 z-50 px-6 py-3 bg-white/80 backdrop-blur-md border-b border-slate-200">
     <div class="absolute bottom-0 left-0 h-[2px] bg-indigo-500 shadow-[0_0_10px_rgba(99,102,241,0.5)] transition-all duration-100" [style.width.%]="scrollProgress()"></div>
-    <div class="max-w-7xl mx-auto flex justify-between items-center">
-      <div class="text-xl font-bold tracking-tighter bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-indigo-800 drop-shadow-md">
-        Ham Tech Innovations
-      </div>
-      
+    <div class="max-w-7xl mx-auto flex justify-between items-center gap-4">
+      <!-- Logo -->
+      <button (click)="scrollTo('hero')" class="flex-shrink-0">
+        <img src="/logo.png" alt="Ham Tech Innovations logo" class="h-10 w-auto object-contain" />
+      </button>
+
       <!-- Desktop Menu -->
-      <div class="hidden md:flex space-x-8 text-sm font-medium text-slate-600">
+      <div class="hidden md:flex items-center space-x-7 text-sm font-medium text-slate-600">
         <button (click)="scrollTo('services')" class="hover:text-indigo-600 transition-colors">Services</button>
         <button (click)="scrollTo('projects')" class="hover:text-indigo-600 transition-colors">Projects</button>
-        <button (click)="scrollTo('about')" class="hover:text-blue-600 transition-colors">About</button>
-        <button (click)="scrollTo('lab')" class="hover:text-slate-700 transition-colors">Lab</button>
-        <button (click)="scrollTo('contact')" class="hover:text-slate-900 transition-colors">Contact</button>
+        <button (click)="scrollTo('about')" class="hover:text-indigo-600 transition-colors">About</button>
+        <button (click)="scrollTo('lab')" class="hover:text-indigo-600 transition-colors">Lab</button>
+        <button (click)="openBookCall()" class="px-5 py-2 rounded-full bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-all shadow-md shadow-indigo-500/20 hover:scale-105">Book a Call &rarr;</button>
       </div>
 
       <!-- Mobile Menu Toggle -->
@@ -33,12 +34,12 @@
 
     <!-- Mobile Menu Dropdown -->
     @if (isMobileMenuOpen()) {
-      <div class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex flex-col space-y-4 shadow-lg animate-in slide-in-from-top-2">
-        <button (click)="scrollTo('services'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium">Services</button>
-        <button (click)="scrollTo('projects'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium">Projects</button>
-        <button (click)="scrollTo('about'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-blue-600 font-medium">About</button>
-        <button (click)="scrollTo('lab'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-slate-700 font-medium">Lab</button>
-        <button (click)="scrollTo('contact'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-slate-900 font-medium">Contact</button>
+      <div class="md:hidden absolute top-full left-0 right-0 bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-4 flex flex-col space-y-3 shadow-lg">
+        <button (click)="scrollTo('services'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium py-1">Services</button>
+        <button (click)="scrollTo('projects'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium py-1">Projects</button>
+        <button (click)="scrollTo('about'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium py-1">About</button>
+        <button (click)="scrollTo('lab'); toggleMobileMenu()" class="text-left text-slate-600 hover:text-indigo-600 font-medium py-1">Lab</button>
+        <button (click)="openBookCall(); toggleMobileMenu()" class="mt-2 w-full py-3 rounded-xl bg-indigo-600 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors text-center">Book a Call &rarr;</button>
       </div>
     }
   </nav>
@@ -46,30 +47,118 @@
   <!-- Main Content Overlay -->
   <main class="relative z-10">
     <!-- Hero Section -->
-    <section class="min-h-screen flex flex-col items-center justify-center px-6 text-center pt-20">
-      <div class="max-w-4xl mx-auto space-y-8">
-        <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold tracking-widest uppercase mb-4 backdrop-blur-sm">
-          Innovation Lab
+    <section id="hero" class="min-h-screen flex flex-col items-center justify-center px-6 text-center pt-24 pb-16">
+      <div class="max-w-4xl mx-auto">
+        <!-- Brand Text -->
+        <div class="flex justify-center mb-8">
+          <div class="text-3xl md:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-indigo-700 drop-shadow-sm">Ham Tech Innovations</div>
         </div>
-        <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight leading-tight">
-          Building the Future of <br />
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-700 to-slate-700">
-            Apps, Platforms, and Digital Products.
+
+        <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50/80 text-indigo-700 text-xs font-semibold tracking-widest uppercase mb-6 backdrop-blur-sm">
+          Startup &bull; Developer Tools &bull; AI Platform
+        </div>
+
+        <h1 class="text-4xl md:text-6xl lg:text-7xl font-extrabold tracking-tight leading-tight mb-6">
+          Accelerated Product Launch Timelines.<br />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 via-blue-600 to-indigo-800">
+            We Build Apps That Scale.
           </span>
         </h1>
-        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-light">
-          We design and build modern applications, platforms, and technology solutions for the next generation of businesses.
+
+        <p class="text-lg md:text-xl text-slate-600 max-w-2xl mx-auto font-light mb-10">
+          From idea to live product, fast. We build web apps, mobile apps, CRM systems, and AI agents for ambitious startups and growing businesses. <strong class="font-semibold text-slate-800">Startup-friendly pricing. Smart, scalable digital solutions.</strong>
         </p>
-        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
-          <button (click)="scrollTo('projects')" class="px-8 py-4 rounded-full bg-slate-900 text-white font-semibold hover:bg-slate-800 transition-all transform hover:scale-105 shadow-lg shadow-slate-900/20">
-            Explore Projects
+
+        <!-- Primary + Secondary CTAs -->
+        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <button (click)="scrollTo('contact')" class="px-8 py-4 rounded-full bg-gradient-to-r from-indigo-600 to-blue-700 text-white font-bold hover:opacity-90 transition-all hover:scale-105 shadow-xl shadow-indigo-500/30 text-base">
+            Get a Free Consultation &rarr;
           </button>
-          <button (click)="scrollTo('lab')" class="px-8 py-4 rounded-full border border-slate-200 bg-white/50 backdrop-blur-md text-slate-900 font-semibold hover:bg-slate-50 transition-all">
-            Our Products
+          <button (click)="scrollTo('projects')" class="px-8 py-4 rounded-full border-2 border-slate-200 bg-white/60 backdrop-blur-md text-slate-800 font-semibold hover:border-indigo-300 hover:bg-white transition-all text-base">
+            See Our Work &darr;
           </button>
-          <button (click)="scrollTo('contact')" class="px-8 py-4 rounded-full border border-transparent text-slate-600 hover:text-slate-900 transition-colors">
-            Contact Us
-          </button>
+        </div>
+
+        <!-- Trust Badges -->
+        <div class="flex flex-wrap items-center justify-center gap-4 md:gap-6 text-sm text-slate-500">
+          <div class="flex items-center gap-1.5">
+            <span class="text-amber-400 text-base">&starf;&starf;&starf;&starf;&starf;</span>
+            <span class="font-medium text-slate-700">5.0 Rated</span>
+          </div>
+          <span class="hidden md:block w-px h-4 bg-slate-300"></span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-green-500"></span>
+            <span>3 Projects Delivered</span>
+          </div>
+          <span class="hidden md:block w-px h-4 bg-slate-300"></span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-indigo-500"></span>
+            <span>Smart, Scalable Digital Solutions</span>
+          </div>
+          <span class="hidden md:block w-px h-4 bg-slate-300"></span>
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+            <span>Accelerated Product Launch Timelines</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="py-16 px-6 bg-white/80 backdrop-blur-md border-y border-white/50">
+      <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <div class="space-y-2">
+          <div class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-700">3</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Projects Delivered</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-700">98%</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Client Satisfaction</div>
+        </div>
+        <div class="space-y-2">
+          <div class="text-4xl md:text-5xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-700">3+</div>
+          <div class="text-sm font-semibold text-slate-500 uppercase tracking-wider">Years of Experience</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Why Choose Us Section -->
+    <section id="why-us" class="py-24 px-6 bg-slate-50/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold tracking-widest uppercase mb-4">Why Choose Us</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Built Different, <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-700">By Design</span></h2>
+          <p class="mt-3 text-slate-500 max-w-xl mx-auto">We're not a typical agency. We're a product-obsessed team that moves like a startup.</p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div class="p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Accelerated Product Launch Timelines</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">We get your product to market fast. Rapid validation, real users, real feedback.</p>
+          </div>
+          <div class="p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Smart, Scalable Digital Solutions</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">We build intelligent, adaptable products that scale with your business and incorporate the latest tech.</p>
+          </div>
+          <div class="p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-green-500 to-emerald-600 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Startup-Friendly Pricing</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">Transparent, flat-rate packages designed for early-stage budgets. No surprise invoices. No scope creep.</p>
+          </div>
+          <div class="p-7 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500 to-teal-600 flex items-center justify-center mb-5 shadow-md group-hover:scale-110 transition-transform">
+              <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2">Built to Scale</h3>
+            <p class="text-slate-500 text-sm leading-relaxed">We architect for growth from the start — modular code, cloud-native infrastructure, and API-first thinking.</p>
+          </div>
         </div>
       </div>
     </section>
@@ -205,38 +294,39 @@
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="min-h-screen py-32 px-6">
+    <section id="projects" class="py-32 px-6 bg-white/80 backdrop-blur-md">
       <div class="max-w-7xl mx-auto">
-        <h2 class="text-3xl md:text-5xl font-bold mb-16 text-center">
-          <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">Featured Projects</span>
-        </h2>
-        
+        <div class="text-center mb-16 space-y-4">
+          <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold tracking-widest uppercase">Real Results</div>
+          <h2 class="text-3xl md:text-5xl font-bold">
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">Case Studies</span>
+            <span class="text-slate-800"> &amp; Projects</span>
+          </h2>
+          <p class="text-slate-500 text-lg max-w-2xl mx-auto font-light">Real problems, real solutions, measurable results &mdash; click any project to see the full story.</p>
+        </div>
+
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           @for (project of projects; track project.id) {
-            <button 
+            <button
               class="group relative p-8 rounded-3xl bg-white border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-500 cursor-pointer overflow-hidden text-left w-full hover:-translate-y-1"
               (click)="openProject(project)"
             >
               <div class="absolute inset-0 bg-gradient-to-br from-indigo-50 to-slate-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              
               <div class="relative z-10">
+                @if (project.resultMetric) {
+                  <div class="inline-block px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-bold mb-4">&#x2713; {{ project.resultMetric }}</div>
+                }
                 <h3 class="text-2xl font-bold mb-3 text-slate-900 group-hover:text-indigo-600 transition-colors">{{ project.name }}</h3>
-                <p class="text-slate-500 mb-6 text-sm leading-relaxed">{{ project.description }}</p>
-                
+                <p class="text-slate-500 mb-5 text-sm leading-relaxed">{{ project.description }}</p>
                 <div class="flex flex-wrap gap-2 mb-6">
                   @for (tech of project.techStack; track tech; let i = $index) {
-                    <span class="px-3 py-1 text-xs rounded-full border" [class]="getTechColorClass(i)">
-                      {{ tech }}
-                    </span>
+                    <span class="px-3 py-1 text-xs rounded-full border" [class]="getTechColorClass(i)">{{ tech }}</span>
                   }
                 </div>
-                
-                <div class="mt-8">
+                <div class="mt-4">
                   <span class="inline-flex items-center justify-center px-5 py-2.5 rounded-xl bg-slate-900 text-white text-sm font-semibold hover:bg-indigo-700 transition-colors shadow-md group-hover:shadow-lg">
-                    Learn More
-                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-                    </svg>
+                    View Case Study
+                    <svg class="w-4 h-4 ml-2 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                   </span>
                 </div>
               </div>
@@ -246,66 +336,98 @@
       </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="py-24 px-6 bg-slate-50/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto">
+        <div class="text-center mb-16">
+          <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold tracking-widest uppercase mb-4">Client Stories</div>
+          <h2 class="text-3xl md:text-4xl font-bold text-slate-900">Don't Take Our Word For It</h2>
+          <p class="mt-3 text-slate-500 max-w-xl mx-auto">Here's what founders and operators say after working with us.</p>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          @for (t of testimonials; track t.id) {
+            <div class="p-8 rounded-2xl bg-white border border-slate-200 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col">
+              <div class="flex items-center gap-1 mb-5">
+                @for (s of [1,2,3,4,5]; track s) {
+                  <svg class="w-4 h-4 text-amber-400 fill-amber-400" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+                }
+              </div>
+              <p class="text-slate-600 leading-relaxed mb-6 flex-1 italic">&ldquo;{{ t.quote }}&rdquo;</p>
+              <div class="flex items-center gap-3 pt-4 border-t border-slate-100">
+                <div class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-blue-600 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">{{ t.avatar }}</div>
+                <div>
+                  <div class="font-semibold text-slate-900 text-sm">{{ t.name }}</div>
+                  <div class="text-slate-500 text-xs">{{ t.role }}, {{ t.company }}</div>
+                </div>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </section>
+
+    <!-- Lead Magnet Section -->
+    <section id="free-audit" class="py-24 px-6 bg-gradient-to-br from-indigo-600 to-blue-800 relative overflow-hidden">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 20% 50%, white 1px, transparent 1px), radial-gradient(circle at 80% 50%, white 1px, transparent 1px); background-size: 40px 40px;"></div>
+      <div class="relative max-w-3xl mx-auto text-center">
+        <div class="inline-block px-4 py-1.5 rounded-full border border-white/30 bg-white/10 text-white text-xs font-semibold tracking-widest uppercase mb-5">Limited Offer &mdash; Free of Charge</div>
+        <h2 class="text-3xl md:text-5xl font-extrabold text-white mb-5">Get a Free Website Audit <span class="line-through opacity-60 text-2xl">&nbsp;Worth $199&nbsp;</span></h2>
+        <p class="text-indigo-100 text-lg mb-4 font-light">We'll analyse your current website or app and deliver a personalised report covering:</p>
+        <ul class="text-indigo-100 text-sm space-y-2 mb-10 text-left max-w-sm mx-auto">
+          <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">&#x2713;</span> Conversion bottlenecks &amp; quick wins</li>
+          <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">&#x2713;</span> Performance &amp; Lighthouse score breakdown</li>
+          <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">&#x2713;</span> SEO gaps &amp; content opportunities</li>
+          <li class="flex items-center gap-2"><span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-white text-xs font-bold flex-shrink-0">&#x2713;</span> Security &amp; technical recommendations</li>
+        </ul>
+        <button (click)="claimAudit()" class="px-10 py-4 rounded-full bg-white text-indigo-700 font-extrabold text-base hover:bg-indigo-50 transition-all hover:scale-105 shadow-2xl shadow-indigo-900/30">
+          Claim Your Free Audit &rarr;
+        </button>
+        <p class="text-indigo-300 text-xs mt-4">No credit card. No sales call pressure. Just a detailed, actionable report &mdash; delivered in 48 hours.</p>
+      </div>
+    </section>
+
     <!-- About & Innovation Lab Section -->
-    <section id="about" class="py-32 px-6 relative">
-      <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16">
-        
-        <!-- About -->
-        <div class="space-y-8 p-10 rounded-3xl bg-white border border-slate-200 shadow-sm backdrop-blur-lg"
-             [style.transform]="'translateY(' + (scrollY() * 0.05) + 'px)'">
-          <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-indigo-800">
-          About Ham Tech Innovations
-          </h2>
-          <p class="text-slate-600 text-lg leading-relaxed font-light">
-            We are a collective of engineers, designers, and visionaries dedicated to pushing the boundaries of what's possible on the web and mobile.
-          </p>
-          <p class="text-slate-500 leading-relaxed font-light">
-            Our mission is to empower businesses with scalable, intelligent, and beautifully crafted digital products that stand out in a crowded market.
-          </p>
+    <section id="about" class="py-32 px-6 relative bg-white/80 backdrop-blur-md">
+      <div class="max-w-7xl mx-auto">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+          <!-- About -->
+          <div class="space-y-6 p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm"
+               [style.transform]="'translateY(' + (scrollY() * 0.03) + 'px)'">
+            <div class="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-800 to-indigo-700 mb-2">Ham Tech Innovations</div>
+            <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-slate-700 to-indigo-800">About Us</h2>
+            <p class="text-slate-600 text-lg leading-relaxed font-light">We are a tight-knit crew of engineers, designers, and product thinkers dedicated to turning ambitious ideas into live products &mdash; fast.</p>
+            <p class="text-slate-500 leading-relaxed font-light">Our mission: empower startups and growing businesses with scalable, intelligent, and beautifully crafted digital products that drive real results. We move like a startup, build like engineers, and think like founders.</p>
+          </div>
+          <!-- Lab -->
+          <div id="lab" class="space-y-6 p-10 rounded-3xl bg-slate-50 border border-slate-200 shadow-sm"
+               [style.transform]="'translateY(' + (scrollY() * -0.03) + 'px)'">
+            <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">Innovation Lab</h2>
+            <p class="text-slate-600 text-lg leading-relaxed font-light">Where experiments become the next generation of products. We prototype constantly with bleeding-edge technologies.</p>
+            <ul class="space-y-4 text-slate-600">
+              <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-cyan-500 mr-3 shadow-[0_0_10px_#06b6d4]"></span>Generative AI Interfaces</li>
+              <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-purple-500 mr-3 shadow-[0_0_10px_#a855f7]"></span>Spatial Computing &amp; WebXR</li>
+              <li class="flex items-center"><span class="w-2 h-2 rounded-full bg-pink-500 mr-3 shadow-[0_0_10px_#ec4899]"></span>High-Performance Rust Backends</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Lab -->
-        <div id="lab" class="space-y-8 p-10 rounded-3xl bg-white border border-slate-200 shadow-sm backdrop-blur-lg"
-             [style.transform]="'translateY(' + (scrollY() * -0.05) + 'px)'">
-          <h2 class="text-3xl md:text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">
-            Innovation Lab
-          </h2>
-          <p class="text-slate-600 text-lg leading-relaxed font-light">
-            Where experiments become reality. We constantly prototype with bleeding-edge technologies.
-          </p>
-          <ul class="space-y-4 text-slate-600">
-            <li class="flex items-center">
-              <span class="w-2 h-2 rounded-full bg-cyan-500 mr-3 shadow-[0_0_10px_#06b6d4]"></span>
-              Generative AI Interfaces
-            </li>
-            <li class="flex items-center">
-              <span class="w-2 h-2 rounded-full bg-purple-500 mr-3 shadow-[0_0_10px_#a855f7]"></span>
-              Spatial Computing & WebXR
-            </li>
-            <li class="flex items-center">
-              <span class="w-2 h-2 rounded-full bg-pink-500 mr-3 shadow-[0_0_10px_#ec4899]"></span>
-              High-Performance Rust Backends
-            </li>
-          </ul>
-        </div>
-
+        <!-- Team Section -->
       </div>
     </section>
 
 
 
     <!-- Contact Section -->
-    <section id="contact" class="py-32 px-6">
+    <section id="contact" class="py-32 px-6 bg-slate-50/80 backdrop-blur-md">
       <div class="max-w-4xl mx-auto text-center space-y-12">
-        <h2 class="text-4xl md:text-6xl font-bold">
-          Ready to build the <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">future?</span>
-        </h2>
-        <p class="text-xl text-slate-500 font-light pt-4">
-          Let's discuss your next big idea.
-        </p>
-        <p class="text-base text-indigo-700 font-medium">
-          <a href="mailto:contactus@hamtechinnovations.com" class="hover:underline">contactus@hamtechinnovations.com</a>
-        </p>
+        <div>
+          <div class="inline-block px-4 py-1.5 rounded-full border border-indigo-200 bg-indigo-50 text-indigo-700 text-xs font-semibold tracking-widest uppercase mb-5">Get In Touch</div>
+          <h2 class="text-4xl md:text-5xl font-bold">Let's Build Something <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-800">Great.</span></h2>
+          <p class="text-lg text-slate-500 font-light mt-4">Tell us about your project and we'll respond within 24 hours with a concrete plan.</p>
+          <p class="text-base text-indigo-700 font-medium mt-3">
+            <a href="mailto:contactus@hamtechinnovations.com" class="hover:underline">contactus@hamtechinnovations.com</a>
+          </p>
+        </div>
         
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-5 text-left max-w-2xl mx-auto p-10 rounded-3xl bg-white border border-slate-200 shadow-xl backdrop-blur-xl">
           
@@ -443,22 +565,66 @@
       </div>
     </section>
     
-    <footer class="py-12 bg-white text-center border-t border-slate-200">
-      <!-- Tech Stack Section (Footer) -->
-      <div class="max-w-7xl mx-auto px-6 mb-10">
-        <h2 class="text-xs font-bold tracking-widest uppercase text-slate-400 mb-6">Powered by Modern Technologies</h2>
-        <div class="flex flex-wrap justify-center gap-2 md:gap-3">
-          @for (tech of techStack; track tech) {
-            <div class="px-3 py-1.5 rounded-xl bg-slate-50 border border-slate-200 text-slate-500 text-xs font-medium cursor-default">
-              {{ tech }}
-            </div>
-          }
+    <footer class="bg-slate-900 text-slate-300">
+      <!-- Main Footer Grid -->
+      <div class="max-w-7xl mx-auto px-6 py-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <!-- Col 1: Brand -->
+        <div class="lg:col-span-1">
+          <div class="mb-4">
+            <div class="text-xl font-bold tracking-tight text-white">Ham Tech Innovations</div>
+            <div class="text-xs text-slate-400 mt-0.5">hamtechinnovations.com</div>
+          </div>
+          <p class="text-slate-400 text-sm leading-relaxed">We build production-ready apps, platforms, and AI agents for ambitious startups and growing businesses.</p>
+          <p class="mt-4 text-xs text-slate-500">Fast Delivery &bull; Smart Solutions &bull; Startup Pricing</p>
+        </div>
+        <!-- Col 2: Services -->
+        <div>
+          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-5">Services</h4>
+          <ul class="space-y-3 text-sm">
+            <li><button (click)="scrollTo('services')" class="hover:text-white transition-colors">Website Development</button></li>
+            <li><button (click)="scrollTo('services')" class="hover:text-white transition-colors">Mobile App Development</button></li>
+            <li><button (click)="scrollTo('services')" class="hover:text-white transition-colors">CRM Solutions</button></li>
+            <li><button (click)="scrollTo('services')" class="hover:text-white transition-colors">AI Agents</button></li>
+            <li><button (click)="claimAudit()" class="hover:text-indigo-400 transition-colors font-semibold">Free Website Audit</button></li>
+          </ul>
+        </div>
+        <!-- Col 3: Company -->
+        <div>
+          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-5">Company</h4>
+          <ul class="space-y-3 text-sm">
+            <li><button (click)="scrollTo('about')" class="hover:text-white transition-colors">About Us</button></li>
+            <li><button (click)="scrollTo('projects')" class="hover:text-white transition-colors">Case Studies</button></li>
+            <li><button (click)="scrollTo('lab')" class="hover:text-white transition-colors">Innovation Lab</button></li>
+            <li><button (click)="scrollTo('testimonials')" class="hover:text-white transition-colors">Client Stories</button></li>
+            <li><button (click)="scrollTo('contact')" class="hover:text-white transition-colors">Contact Us</button></li>
+          </ul>
+        </div>
+        <!-- Col 4: Connect + Legal -->
+        <div>
+          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-5">Connect</h4>
+          <ul class="space-y-3 text-sm mb-6">
+            <li><a href="https://x.com/Ham_Tech_?s=20" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.008 5.964H5.078z"/></svg>Twitter / X</a></li>
+            <li><a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-2"><svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" clip-rule="evenodd"/></svg>LinkedIn</a></li>
+            <li><a href="mailto:contactus@hamtechinnovations.com" class="hover:text-white transition-colors">contactus@hamtechinnovations.com</a></li>
+          </ul>
+          <h4 class="text-white text-sm font-semibold uppercase tracking-wider mb-4">Legal</h4>
+          <ul class="space-y-2 text-sm">
+            <li><button (click)="showPrivacyPolicy.set(true)" class="hover:text-white transition-colors">Privacy Policy</button></li>
+            <li><button (click)="showTerms.set(true)" class="hover:text-white transition-colors">Terms &amp; Conditions</button></li>
+          </ul>
         </div>
       </div>
-      
-      <p class="text-slate-500 text-sm">
-        &copy; 2026 Ham Tech Innovations. All rights reserved.
-      </p>
+      <!-- Footer Bottom Bar -->
+      <div class="border-t border-slate-800 px-6 py-6">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+          <p class="text-slate-500 text-sm">&copy; 2026 Ham Tech Innovations. All rights reserved.</p>
+          <div class="flex flex-wrap justify-center gap-2">
+            @for (tech of techStack; track tech) {
+              <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-500 text-xs font-medium">{{ tech }}</span>
+            }
+          </div>
+        </div>
+      </div>
     </footer>
   </main>
 
@@ -477,16 +643,34 @@
           </svg>
         </button>
         
-        <h3 class="text-3xl font-bold mb-4 text-slate-900">{{ activeProject()?.name }}</h3>
-        <p class="text-slate-600 text-lg mb-8 leading-relaxed">{{ activeProject()?.description }}</p>
-        
-        <div class="mb-8">
+        <h3 class="text-3xl font-bold mb-2 text-slate-900">{{ activeProject()?.name }}</h3>
+        @if (activeProject()?.resultMetric) {
+          <div class="inline-block px-3 py-1 rounded-full bg-green-50 border border-green-200 text-green-700 text-xs font-bold mb-4">&#x2713; {{ activeProject()?.resultMetric }}</div>
+        }
+        <p class="text-slate-600 mb-6 leading-relaxed">{{ activeProject()?.description }}</p>
+
+        @if (activeProject()?.problem) {
+          <div class="space-y-4 mb-6">
+            <div class="p-4 rounded-xl bg-red-50 border border-red-100">
+              <div class="text-xs font-bold uppercase tracking-wider text-red-500 mb-1">Problem</div>
+              <p class="text-slate-700 text-sm leading-relaxed">{{ activeProject()?.problem }}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100">
+              <div class="text-xs font-bold uppercase tracking-wider text-indigo-500 mb-1">Solution</div>
+              <p class="text-slate-700 text-sm leading-relaxed">{{ activeProject()?.solution }}</p>
+            </div>
+            <div class="p-4 rounded-xl bg-green-50 border border-green-100">
+              <div class="text-xs font-bold uppercase tracking-wider text-green-500 mb-1">Result</div>
+              <p class="text-slate-700 text-sm leading-relaxed">{{ activeProject()?.result }}</p>
+            </div>
+          </div>
+        }
+
+        <div class="mb-6">
           <h4 class="text-sm font-semibold text-slate-500 uppercase tracking-wider mb-3">Technologies</h4>
           <div class="flex flex-wrap gap-2">
             @for (tech of activeProject()?.techStack; track tech; let i = $index) {
-              <span class="px-3 py-1 text-sm rounded-full border" [class]="getTechColorClass(i)">
-                {{ tech }}
-              </span>
+              <span class="px-3 py-1 text-sm rounded-full border" [class]="getTechColorClass(i)">{{ tech }}</span>
             }
           </div>
         </div>
@@ -533,6 +717,189 @@
             </a>
           }
         </div>
+      </div>
+    </div>
+  }
+
+  <!-- Sticky CTA Button -->
+  <div class="fixed bottom-6 right-6 z-[90] transition-all duration-500"
+       [class.opacity-0]="!showStickyCta()"
+       [class.pointer-events-none]="!showStickyCta()"
+       [class.translate-y-4]="!showStickyCta()"
+       [class.opacity-100]="showStickyCta()"
+       [class.translate-y-0]="showStickyCta()">
+    <button (click)="openBookCall()" class="flex items-center gap-2 px-6 py-3.5 rounded-full bg-indigo-600 text-white font-bold text-sm shadow-2xl shadow-indigo-500/40 hover:bg-indigo-700 hover:scale-105 transition-all">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+      Book a Call
+    </button>
+  </div>
+
+  <!-- Book a Call Modal -->
+  @if (bookCallOpen()) {
+    <div class="fixed inset-0 z-[110] flex items-center justify-center p-6">
+      <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" (click)="closeBookCall()" role="button" tabindex="0" aria-label="Close"></div>
+      <div class="relative w-full max-w-md rounded-3xl bg-white shadow-2xl p-8 animate-in fade-in zoom-in duration-200">
+        <button (click)="closeBookCall()" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+
+        @if (!bookCallSent()) {
+          <div class="mb-6">
+            <h2 class="text-2xl font-bold text-slate-900">Book a Free Call</h2>
+            <p class="text-slate-500 text-sm mt-1">Our Project Coordinator will reach out to confirm your slot.</p>
+          </div>
+          <form [formGroup]="bookCallForm" (ngSubmit)="submitBookCall()" class="space-y-4">
+            <div>
+              <label for="bc-name" class="block text-sm font-medium text-slate-600 mb-1">Full Name <span class="text-red-400">*</span></label>
+              <input id="bc-name" type="text" formControlName="fullName"
+                     class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                     [class.border-red-400]="bookCallForm.get('fullName')?.invalid && bookCallForm.get('fullName')?.touched"
+                     placeholder="Jane Smith" />
+              @if (bookCallForm.get('fullName')?.invalid && bookCallForm.get('fullName')?.touched) {
+                <p class="text-red-400 text-xs mt-1">Please enter your full name.</p>
+              }
+            </div>
+            <div>
+              <label for="bc-phone" class="block text-sm font-medium text-slate-600 mb-1">Phone Number <span class="text-red-400">*</span></label>
+              <input id="bc-phone" type="tel" formControlName="phone"
+                     class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                     [class.border-red-400]="bookCallForm.get('phone')?.invalid && bookCallForm.get('phone')?.touched"
+                     placeholder="+1 (555) 000-0000" />
+              @if (bookCallForm.get('phone')?.invalid && bookCallForm.get('phone')?.touched) {
+                <p class="text-red-400 text-xs mt-1">Please enter a valid phone number.</p>
+              }
+            </div>
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label for="bc-date" class="block text-sm font-medium text-slate-600 mb-1">Preferred Date <span class="text-red-400">*</span></label>
+                <input id="bc-date" type="date" formControlName="preferredDate"
+                       class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all"
+                       [class.border-red-400]="bookCallForm.get('preferredDate')?.invalid && bookCallForm.get('preferredDate')?.touched" />
+                @if (bookCallForm.get('preferredDate')?.invalid && bookCallForm.get('preferredDate')?.touched) {
+                  <p class="text-red-400 text-xs mt-1">Please pick a date.</p>
+                }
+              </div>
+              <div>
+                <label for="bc-time" class="block text-sm font-medium text-slate-600 mb-1">Time Slot <span class="text-red-400">*</span></label>
+                <select id="bc-time" formControlName="preferredTime"
+                        class="w-full px-4 py-3 rounded-xl bg-slate-50 border border-slate-200 text-slate-900 focus:outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20 transition-all appearance-none"
+                        [class.border-red-400]="bookCallForm.get('preferredTime')?.invalid && bookCallForm.get('preferredTime')?.touched">
+                  <option value="" disabled selected>Select…</option>
+                  <option value="Morning (9AM–12PM)">Morning (9–12 PM)</option>
+                  <option value="Afternoon (12PM–3PM)">Afternoon (12–3 PM)</option>
+                  <option value="Late Afternoon (3PM–6PM)">Late Afternoon (3–6 PM)</option>
+                  <option value="Evening (6PM–8PM)">Evening (6–8 PM)</option>
+                </select>
+                @if (bookCallForm.get('preferredTime')?.invalid && bookCallForm.get('preferredTime')?.touched) {
+                  <p class="text-red-400 text-xs mt-1">Please select a time slot.</p>
+                }
+              </div>
+            </div>
+            <button type="submit" [disabled]="isBookCallSending()"
+                    class="mt-2 w-full py-4 rounded-xl bg-gradient-to-r from-indigo-600 to-blue-700 text-white font-bold hover:opacity-90 transition-all hover:scale-[1.01] shadow-lg disabled:opacity-60 disabled:cursor-not-allowed flex justify-center items-center gap-2">
+              @if (isBookCallSending()) {
+                <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                Scheduling...
+              } @else {
+                Request a Call &rarr;
+              }
+            </button>
+          </form>
+        } @else {
+          <!-- Success State -->
+          <div class="py-8 text-center">
+            <div class="flex items-center justify-center mb-5">
+              <svg class="w-16 h-16 text-green-500" viewBox="0 0 52 52" fill="none">
+                <circle cx="26" cy="26" r="25" stroke="#22c55e" stroke-width="2" fill="#f0fdf4" style="stroke-dasharray:157;stroke-dashoffset:157;animation:draw-circle 0.5s ease forwards;"/>
+                <path d="M14 26l9 9 15-17" stroke="#22c55e" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke-dasharray:42;stroke-dashoffset:42;animation:draw-check 0.4s 0.4s ease forwards;"/>
+                <style>
+                  @keyframes draw-circle{to{stroke-dashoffset:0}}
+                  @keyframes draw-check{to{stroke-dashoffset:0}}
+                </style>
+              </svg>
+            </div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-2">You're all set!</h3>
+            <p class="text-slate-600 text-sm leading-relaxed">Thank you! Our <strong>Project Coordinator</strong> will reach out within <strong>24 hours</strong> to confirm your slot and discuss how we can help bring your vision to life.</p>
+          </div>
+        }
+      </div>
+    </div>
+  }
+
+  <!-- Privacy Policy Modal -->
+  @if (showPrivacyPolicy()) {
+    <div class="fixed inset-0 z-[110] flex items-center justify-center p-6">
+      <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" (click)="showPrivacyPolicy.set(false)" role="button" tabindex="0"></div>
+      <div class="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl bg-white shadow-2xl p-8 animate-in fade-in duration-200">
+        <button (click)="showPrivacyPolicy.set(false)" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <h2 class="text-2xl font-bold text-slate-900 mb-1">Privacy Policy</h2>
+        <p class="text-xs text-slate-400 mb-6">Effective Date: March 2026</p>
+        <div class="prose prose-sm text-slate-600 space-y-4">
+          <p>Ham Tech Innovations ("we", "our", or "us") respects your privacy and is committed to protecting your personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you visit <strong>hamtechinnovations.com</strong>.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">1. Information We Collect</h3>
+          <p><strong>Personal Information:</strong> Name, email address, phone number, company name, and any details you submit via contact forms.</p>
+          <p><strong>Non-Personal Information:</strong> Browser type, IP address, device information, and pages visited.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">2. How We Use Your Information</h3>
+          <p>We use your information to respond to inquiries, provide services, improve your experience, and communicate updates or important information.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">3. Cookies &amp; Tracking</h3>
+          <p>We use essential cookies and similar technologies to enhance user experience and track website traffic. You can disable cookies through your browser settings.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">4. Data Sharing</h3>
+          <p>We do NOT sell, trade, or rent your personal information. We may share data with trusted service providers (hosting, analytics, email tools) and legal authorities if required by law.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">5. Data Security</h3>
+          <p>We implement appropriate technical measures to protect your data. However, no method of transmission over the Internet is 100% secure.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">6. Your Rights</h3>
+          <p>You have the right to access, correct, or request deletion of your personal data at any time by contacting us at <strong>contactus&#64;hamtechinnovations.com</strong>.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">7. Updates</h3>
+          <p>We may update this Privacy Policy from time to time. Updates will be posted on this page.</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Terms & Conditions Modal -->
+  @if (showTerms()) {
+    <div class="fixed inset-0 z-[110] flex items-center justify-center p-6">
+      <div class="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" (click)="showTerms.set(false)" role="button" tabindex="0"></div>
+      <div class="relative w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-3xl bg-white shadow-2xl p-8 animate-in fade-in duration-200">
+        <button (click)="showTerms.set(false)" class="absolute top-5 right-5 text-slate-400 hover:text-slate-700 transition-colors" aria-label="Close">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+        <h2 class="text-2xl font-bold text-slate-900 mb-1">Terms &amp; Conditions</h2>
+        <p class="text-xs text-slate-400 mb-6">Effective Date: March 2026</p>
+        <div class="prose prose-sm text-slate-600 space-y-4">
+          <p>By accessing or using <strong>hamtechinnovations.com</strong>, you agree to comply with and be bound by these Terms and Conditions.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">1. Use of Website</h3>
+          <p>You agree to use this website only for lawful purposes and in a way that does not infringe the rights of others.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">2. Intellectual Property</h3>
+          <p>All content on this website, including text, graphics, logos, and code, is the property of Ham Tech Innovations and is protected by applicable copyright laws. You may not copy or distribute any content without prior written permission.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">3. Services Disclaimer</h3>
+          <p>We provide digital development services including web, mobile, and software solutions. We do not guarantee specific business outcomes, exact timelines (unless agreed in writing), or error-free services.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">4. Limitation of Liability</h3>
+          <p>Ham Tech Innovations shall not be held liable for any indirect or consequential damages, loss of data, revenue, or business. Use of our website and services is at your own risk.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">5. Payment &amp; Agreements</h3>
+          <p>All project-related terms (pricing, delivery, scope) will be defined in separate agreements or contracts.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">6. Governing Law</h3>
+          <p>These Terms shall be governed by and interpreted in accordance with the laws of India.</p>
+          <h3 class="text-slate-800 font-semibold text-base mt-4">7. Contact</h3>
+          <p>For any questions: <strong>contactus&#64;hamtechinnovations.com</strong></p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- Cookie Consent Banner -->
+  @if (showCookieBanner()) {
+    <div class="fixed bottom-4 left-4 z-[120] max-w-sm rounded-2xl bg-slate-900 text-white p-5 shadow-2xl animate-in slide-in-from-bottom-4 duration-300">
+      <p class="text-sm font-semibold mb-1">We use cookies 🍪</p>
+      <p class="text-slate-400 text-xs leading-relaxed mb-4">We use essential cookies to improve your experience and analyse site traffic. No personal data is sold.</p>
+      <div class="flex gap-3">
+        <button (click)="acceptCookies()" class="flex-1 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-colors">Accept</button>
+        <button (click)="showCookieBanner.set(false)" class="flex-1 py-2 rounded-xl bg-slate-700 text-slate-300 text-xs font-semibold hover:bg-slate-600 transition-colors">Dismiss</button>
       </div>
     </div>
   }
